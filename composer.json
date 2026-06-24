@@ -1,0 +1,28 @@
+{
+    "name": "lucasdvillegas/laravel-crud-generator",
+    "description": "Laravel CRUD generator for Inertia Vue and shadcn applications",
+    "type": "library",
+    "authors": [
+        {
+        "name": "Lucas Villegas",
+        "email": "lucasdavillegas@gmail.com",
+        "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "lucasdvillegas\\LaravelCrudGenerator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "lucasdvillegas\\LaravelCrudGenerator\\CrudServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^12.0"
+    }
+}
