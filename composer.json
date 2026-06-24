@@ -2,6 +2,7 @@
     "name": "lucasdvillegas/laravel-crud-generator",
     "description": "Laravel CRUD generator for Inertia Vue and shadcn applications",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
         "name": "Lucas Villegas",

@@ -41,6 +41,7 @@ class RouteGenerator
 
 
 // {$resource} routes
+use App\Http\Controllers\{$controller};
 Route::resource('{$resource}', {$controller}::class);
 
 PHP;
