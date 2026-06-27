@@ -32,7 +32,7 @@ Currently, the package can generate:
 Install the package via Composer:
 
 ```bash
-composer require lvillegas/laravel-crud-generator:@dev
+composer require lucasdvillegas/laravel-crud-generator:@dev
 ```
 
 For local development, add the repository path:
@@ -40,10 +40,10 @@ For local development, add the repository path:
 ```json
 "repositories": [
     {
-        "type": "path",
-        "url": "../laravel-crud-generator"
+        "type": "vcs",
+        "url": "https://github.com/lucasdvillegas/laravel-crud-generator"
     }
-]
+],
 ```
 
 Then:
@@ -121,9 +121,7 @@ Generates:
 
 ```php
 $table->string('title');
-
 $table->longText('body');
-
 $table->boolean('published');
 ```
 
@@ -136,16 +134,13 @@ Example:
 ```php
 class Product extends Model
 {
-
     use HasFactory;
-
 
     protected $fillable = [
         'name',
         'price',
         'active'
     ];
-
 }
 ```
 
@@ -159,13 +154,9 @@ Example:
 
 ```php
 return [
-
     'name' => fake()->word(),
-
     'price' => fake()->randomFloat(2,1,1000),
-
     'active' => fake()->boolean(),
-
 ];
 ```
 
@@ -221,7 +212,6 @@ Generate:
 ```php
 use App\Http\Controllers\ProductController;
 
-
 // products routes
 Route::resource(
     'products',
@@ -231,7 +221,7 @@ Route::resource(
 
 ---
 
-## Vue/Inertia CRUD generation
+## Vue/Inertia CRUD generation (PENDING)
 
 Automatically create:
 
