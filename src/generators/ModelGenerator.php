@@ -24,16 +24,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class {$model} extends Model
 {
-
     use HasFactory;
 
     protected \$fillable = [
         {$fillable}
     ];
-
 }
 
 PHP;
@@ -43,7 +40,5 @@ PHP;
             "app/Models/{$model}.php",
             $content
         );
-
     }
-
 }

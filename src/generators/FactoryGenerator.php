@@ -55,21 +55,14 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 class {$model}Factory extends Factory
 {
-
     public function definition(): array
     {
-
         return [
-
             {$definitions}
-
         ];
-
     }
-
 }
 
 PHP;

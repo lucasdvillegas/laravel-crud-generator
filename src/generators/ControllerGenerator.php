@@ -2,108 +2,73 @@
 
 namespace lucasdvillegas\LaravelCrudGenerator\Generators;
 
+use Illuminate\Support\Str;
 
 class ControllerGenerator extends BaseGenerator
 {
-
     public function generate(
         string $model
     ) {
 
+        $variable = $this->variable($model);
 
         $content = <<<PHP
 <?php
 
 namespace App\Http\Controllers;
 
-
 use App\Models\\{$model};
 use App\Http\Requests\\{$model}Request;
 use Inertia\Inertia;
 
-
 class {$model}Controller extends Controller
 {
-
-
     public function index()
     {
-
         return Inertia::render('{$model}/Index', [
-
-            '{$this->lower($model)}s' => {$model}::latest()->paginate(10)
-
+            '{$variable}s' => {$model}::latest()->paginate(10)
         ]);
-
     }
-
-
 
     public function create()
     {
-
         return Inertia::render('{$model}/Create');
-
     }
-
-
 
     public function store({$model}Request \$request)
     {
-
         {$model}::create(
             \$request->validated()
         );
 
-
         return redirect()
-            ->route('{$this->lower($model)}s.index');
-
+            ->route('{$variable}s.index');
     }
 
-
-
-    public function edit({$model} \$model)
+    public function edit({$model} \${$variable})
     {
-
         return Inertia::render('{$model}/Update', [
-
-            'model' => \$model
-
+            '{$variable}' => \${$variable}
         ]);
-
     }
 
-
-
-    public function update(
-        {$model}Request \$request,
-        {$model} \$model
-    ) {
-
-        \$model->update(
+    public function update({$model}Request \$request, {$model} \${$variable})
+    {
+        \${$variable}->update(
             \$request->validated()
         );
 
-
         return redirect()
-            ->route('{$this->lower($model)}s.index');
-
+            ->route('{$variable}s.index');
     }
 
-
-
-    public function destroy({$model} \$model)
+    public function destroy({$model} \${$variable})
     {
-
-        \$model->delete();
-
+        \${$variable}->delete();
 
         return redirect()
-            ->route('{$this->lower($model)}s.index');
-
+            ->route('{$variable}s.index');
     }
-
 }
 
 PHP;
@@ -113,13 +78,11 @@ PHP;
             "app/Http/Controllers/{$model}Controller.php",
             $content
         );
-
     }
 
 
-    private function lower($value)
+    private function variable($value)
     {
-        return strtolower($value);
+        return Str::camel($value);
     }
-
 }
