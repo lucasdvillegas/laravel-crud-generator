@@ -3,12 +3,13 @@
 namespace lucasdvillegas\LaravelCrudGenerator;
 
 use Illuminate\Support\ServiceProvider;
+use lucasdvillegas\LaravelCrudGenerator\Commands\CrudCommand;
 
 class CrudServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        // Register bindings ONLY (no side effects)
+        // NO commands here
     }
 
     public function boot(): void
@@ -17,13 +18,10 @@ class CrudServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->registerCommands();
-    }
-
-    protected function registerCommands(): void
-    {
-        $this->commands([
-            \lucasdvillegas\LaravelCrudGenerator\Commands\CrudCommand::class,
-        ]);
+        if (class_exists(CrudCommand::class)) {
+            $this->commands([
+                CrudCommand::class,
+            ]);
+        }
     }
 }
