@@ -11,14 +11,20 @@ class RequestGenerator extends BaseGenerator
         array $fields
     ) {
 
-
         $rules = collect($fields)
-            ->map(fn($field)=>
+            ->map(fn($field) =>
                 "'{$field['name']}' => [
-                    'required'
+                    {$this->generateRules($field['type'])}
                 ]"
             )
             ->implode(",\n\n");
+
+
+        $phpDocFields = collect($fields)
+            ->map(fn($field) =>
+                "     *   {$field['name']}: array<int, {$this->phpDocType($field['type'])}>,"
+            )
+            ->implode("\n");
 
 
         $content = <<<PHP
@@ -36,6 +42,11 @@ class {$model}Request extends FormRequest
         return true;
     }
 
+    /**
+     * @return array{
+{$phpDocFields}
+     * }
+     */
     public function rules(): array
     {
         return [
@@ -52,6 +63,34 @@ PHP;
             $content
         );
 
+    }
+
+
+    private function phpDocType(string $type): string
+    {
+        return match ($type) {
+            'boolean' => 'bool',
+            'integer' => 'int',
+            'decimal', 'float' => 'float',
+            default => 'string',
+        };
+    }
+
+
+    private function generateRules(string $type): string
+    {
+        return match ($type) {
+
+            'boolean' => "'required',\n                    'boolean'",
+
+            'integer' => "'required',\n                    'integer'",
+
+            'decimal', 'float' =>
+                "'required',\n                    'numeric'",
+
+            default =>
+                "'required',\n                    'string'",
+        };
     }
 
 }

@@ -15,17 +15,21 @@ class ModelGenerator extends BaseGenerator
             )
             ->implode(",\n        ");
 
+        $factory = "{$model}Factory";
+
 
         $content = <<<PHP
 <?php
 
 namespace App\Models;
 
+use Database\Factories\{$factory};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class {$model} extends Model
 {
+    /** @use HasFactory<{$factory}> */
     use HasFactory;
 
     protected \$fillable = [
