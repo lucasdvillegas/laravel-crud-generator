@@ -19,6 +19,9 @@ use App\Models\\{$model};
 
 class {$model}Seeder extends Seeder
 {
+    /**
+     * Seed the application's database.
+     */
     public function run(): void
     {
         {$model}::factory(10)->create();

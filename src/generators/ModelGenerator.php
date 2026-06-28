@@ -17,13 +17,14 @@ class ModelGenerator extends BaseGenerator
 
         $factory = "{$model}Factory";
 
+        $factoryImport = "Database\\Factories\\{$factory}";
 
         $content = <<<PHP
 <?php
 
 namespace App\Models;
 
-use Database\Factories\{$factory};
+use {$factoryImport};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

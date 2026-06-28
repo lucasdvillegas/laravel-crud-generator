@@ -53,10 +53,20 @@ class FactoryGenerator extends BaseGenerator
 
 namespace Database\Factories;
 
+use App\Models\\{$model};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<{$model}>
+ */
 class {$model}Factory extends Factory
 {
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [

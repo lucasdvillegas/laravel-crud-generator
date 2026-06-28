@@ -19,7 +19,9 @@ namespace App\Http\Controllers;
 
 use App\Models\\{$model};
 use App\Http\Requests\\{$model}Request;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class {$model}Controller extends Controller
 {   
