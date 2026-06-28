@@ -22,20 +22,29 @@ use App\Http\Requests\\{$model}Request;
 use Inertia\Inertia;
 
 class {$model}Controller extends Controller
-{
-    public function index()
+{   
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): Response
     {
         return Inertia::render('{$model}/Index', [
             '{$variable}s' => {$model}::latest()->paginate(10)
         ]);
     }
 
-    public function create()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): Response
     {
         return Inertia::render('{$model}/Create');
     }
 
-    public function store({$model}Request \$request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store({$model}Request \$request): RedirectResponse
     {
         {$model}::create(
             \$request->validated()
@@ -45,14 +54,20 @@ class {$model}Controller extends Controller
             ->route('{$variable}s.index');
     }
 
-    public function edit({$model} \${$variable})
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({$model} \${$variable}): Response
     {
         return Inertia::render('{$model}/Update', [
             '{$variable}' => \${$variable}
         ]);
     }
 
-    public function update({$model}Request \$request, {$model} \${$variable})
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update({$model}Request \$request, {$model} \${$variable}): RedirectResponse
     {
         \${$variable}->update(
             \$request->validated()
@@ -62,7 +77,10 @@ class {$model}Controller extends Controller
             ->route('{$variable}s.index');
     }
 
-    public function destroy({$model} \${$variable})
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({$model} \${$variable}): RedirectResponse
     {
         \${$variable}->delete();
 
